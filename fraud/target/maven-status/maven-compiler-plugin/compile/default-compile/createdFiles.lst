@@ -1,0 +1,6 @@
+com\akgarg\fraud\FraudCheckHistoryRepository.class
+com\akgarg\fraud\FraudCheckHistory$FraudCheckHistoryBuilder.class
+com\akgarg\fraud\FraudApplication.class
+com\akgarg\fraud\FraudController.class
+com\akgarg\fraud\FraudCheckService.class
+com\akgarg\fraud\FraudCheckHistory.class

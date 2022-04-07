@@ -1,0 +1,8 @@
+com\akgarg\notification\NotificationApplication.class
+com\akgarg\notification\rabbitmq\NotificationConsumer.class
+com\akgarg\notification\Notification$NotificationBuilder.class
+com\akgarg\notification\NotificationConfig.class
+com\akgarg\notification\NotificationService.class
+com\akgarg\notification\NotificationController.class
+com\akgarg\notification\Notification.class
+com\akgarg\notification\NotificationRepository.class
