@@ -1,0 +1,107 @@
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql
+
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - spring
+
+  rabbitmq:
+    image: rabbitmq:3.10.0-rc.1-management-alpine
+    container_name: rabbitmq
+    networks:
+      - spring
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  eureka-server:
+    image: akgarg0472/eureka-server:latest
+    container_name: eurekaserver
+    ports:
+      - "8761:8761"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+
+  api-gateway:
+    image: akgarg0472/api-gateway:latest
+    container_name: apigateway
+    ports:
+      - "8083:8083"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+    depends_on:
+      - zipkin
+      - eureka-server
+
+  customer:
+    image: akgarg0472/customer:latest
+    container_name: customer
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - mysql
+    depends_on:
+      - mysql
+      - eureka-server
+      - zipkin
+      - rabbitmq
+
+  fraud:
+    image: akgarg0472/fraud:latest
+    container_name: fraud
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - mysql
+      - spring
+    depends_on:
+      - mysql
+      - eureka-server
+      - zipkin
+      - rabbitmq
+
+  notification:
+    image: akgarg0472/notifications:latest
+    container_name: notification
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - mysql
+      - spring
+    depends_on:
+      - mysql
+      - eureka-server
+      - zipkin
+      - rabbitmq
+
+networks:
+  mysql:
+    driver: bridge
+  spring:
+    driver: bridge

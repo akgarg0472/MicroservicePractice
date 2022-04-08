@@ -1,0 +1,26 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: fraud
+  zipkin:
+    base-url: http://zipkin:9411
+
+  datasource:
+    name: customerdb
+    url: jdbc:mysql://mysql:3306/frauddb?createDatabaseIfNotExist=true
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+eureka:
+  client:
+    service-url:
+      default-zone: http://eurekaserver:8761/eureka

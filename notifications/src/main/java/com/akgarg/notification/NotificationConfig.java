@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
  * Github: https://github.com/akgarg0472
  */
 @Configuration
+@SuppressWarnings("unused")
 public class NotificationConfig {
 
     @Value("${rabbitmq.exchanges.internal}")

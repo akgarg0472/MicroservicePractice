@@ -8,12 +8,17 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="clients" />
-        <module name="fraud" />
         <module name="amqp" />
-        <module name="api-gateway" />
-        <module name="eureka-server" />
+        <module name="fraud" />
         <module name="notifications" />
         <module name="customer" />
+      </profile>
+      <profile name="Annotation profile for MicroserviceOne" enabled="true">
+        <sourceOutputDir name="../target/generated-sources/annotations" />
+        <sourceTestOutputDir name="../target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="api-gateway" />
+        <module name="eureka-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -22,7 +27,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="MicroserviceOne" options="" />
+      <module name="MicroserviceOne" options="-parameters" />
       <module name="amqp" options="-parameters" />
       <module name="api-gateway" options="-parameters" />
       <module name="clients" options="-parameters" />
